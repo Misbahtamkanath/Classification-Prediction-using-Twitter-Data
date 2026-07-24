@@ -1,0 +1,92 @@
+{% extends 'users/userbase.html' %}
+
+{% block contents %}
+
+<!-- DataTables CSS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- DataTables JS -->
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#datasetTable').DataTable({
+            pageLength: 50,
+            lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+        });
+    });
+</script>
+
+<style>
+    .dataTable {
+        background-color: rgba(255, 255, 255, 0.95);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .dataTable thead {
+        background-color: #1e3a8a;
+        color: white;
+    }
+
+    .dataTable tbody tr:nth-child(even) {
+        background-color: rgba(243, 244, 246, 0.8);
+    }
+
+    .dataTable tbody tr:nth-child(odd) {
+        background-color: rgba(255, 255, 255, 0.9);
+    }
+
+    .dataTable tbody tr:hover {
+        background-color: rgba(209, 213, 219, 0.8);
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+        background: #3b82f6 !important;
+        color: white !important;
+        border: none;
+    }
+
+    .dataTables_wrapper .dataTables_filter input,
+    .dataTables_wrapper .dataTables_length select {
+        border: 1px solid #d1d5db;
+        border-radius: 4px;
+        padding: 4px;
+    }
+</style>
+
+<!-- Section Header -->
+<section class="py-12">
+    <div class="container mx-auto px-4 text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+            Dataset View
+        </h2>
+        <p class="text-lg text-gray-200 max-w-2xl mx-auto">
+            Explore the sentiment analysis dataset below. Showing 50 entries per page.
+        </p>
+    </div>
+</section>
+
+<!-- Dataset Table -->
+<section class="py-8">
+    <div class="container mx-auto px-4">
+        <div class="bg-white bg-opacity-10 backdrop-blur-lg p-6 rounded-xl shadow-lg">
+            <div class="overflow-x-auto">
+
+                {% if data %}
+                    {{ data|safe }}
+                {% else %}
+                    <div class="text-white text-center">
+                        No dataset available.
+                    </div>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,97 @@
+{% extends 'users/userbase.html' %}
+{% load static %}
+
+{% block contents %}
+<!-- Prediction Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-xl-7">
+                <!-- Prediction Card -->
+                <div class="glass card shadow-lg border-0 rounded-4 p-4 p-md-5 mb-5">
+                    <div class="card-body text-center">
+                        <!-- Header -->
+                        <div class="mb-5">
+                            <i class="fab fa-twitter fa-3x text-primary mb-4 opacity-90"></i>
+                            <h1 class="hero-title mb-3">Sentiment Prediction</h1>
+                            <p class="lead opacity-90 mb-0">
+                                Enter Twitter text to predict Positive, Negative, or Neutral sentiment
+                            </p>
+                        </div>
+
+                        <!-- Success Status -->
+                        {% if status %}
+                            <div class="alert alert-success alert-dismissible fade show rounded-3 mb-5" role="alert">
+                                <i class="fas fa-check-circle me-3 fs-4"></i>
+                                <strong>Success!</strong> {{ status }}
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
+                            </div>
+                        {% endif %}
+
+                        <!-- Prediction Result -->
+                        {% if prediction %}
+                            <div class="glass bg-primary bg-opacity-20 border border-primary border-opacity-50 p-5 rounded-4 mb-5">
+                                <h3 class="h2 fw-bold mb-4 text-white">Prediction Result</h3>
+                                <div class="display-4 fw-bold px-5 py-4 rounded-3 mb-4 mx-auto text-center {% if prediction|lower == 'positive' %}bg-success bg-opacity-90 text-white
+                                    {% elif prediction|lower == 'negative' %}bg-danger bg-opacity-90 text-white
+                                    {% else %}bg-warning bg-opacity-90 text-dark{% endif %} d-inline-block" style="min-width: 200px;">
+                                    {{ prediction|upper }}
+                                </div>
+                                <div class="opacity-90">
+                                    <i class="fas fa-quote-left me-2"></i>
+                                    <strong>"{{ input_text }}"</strong>
+                                    <i class="fas fa-quote-right ms-2"></i>
+                                </div>
+                            </div>
+
+                            <!-- Analyze Another -->
+                            <div class="text-center mb-5">
+                                <a href="{% url 'prediction' %}" class="btn btn-success btn-lg px-5 py-3 fw-bold rounded-pill">
+                                    <i class="fas fa-plus-circle me-2"></i>Analyze Another Tweet
+                                </a>
+                            </div>
+                        {% endif %}
+
+                        <!-- Error Message -->
+                        {% if error %}
+                            <div class="alert alert-danger alert-dismissible fade show rounded-3 mb-5" role="alert">
+                                <i class="fas fa-exclamation-triangle me-3 fs-4"></i>
+                                <strong>Error!</strong> {{ error }}
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
+                            </div>
+                        {% endif %}
+
+                        <!-- Prediction Form -->
+                        {% if not prediction %}
+                            <form action="{% url 'prediction' %}" method="POST" novalidate>
+                                {% csrf_token %}
+                                
+                                <div class="mb-5">
+                                    <label for="text" class="form-label fw-bold fs-5 mb-4 text-white d-block">
+                                        <i class="fas fa-edit me-2"></i>Tweet Text for Analysis
+                                    </label>
+                                    <textarea name="text" 
+                                              id="text" 
+                                              required 
+                                              rows="6"
+                                              class="form-control form-control-lg glass p-4 fs-6"
+                                              placeholder="Enter Twitter text to analyze sentiment..."></textarea>
+                                    <div class="form-text text-white-50 mt-2">
+                                        Max 500 characters • Supports emojis & hashtags
+                                    </div>
+                                </div>
+
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-primary btn-lg fw-bold py-4 fs-5 rounded-pill shadow-lg">
+                                        <i class="fas fa-magic me-2"></i>Predict Sentiment
+                                    </button>
+                                </div>
+                            </form>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

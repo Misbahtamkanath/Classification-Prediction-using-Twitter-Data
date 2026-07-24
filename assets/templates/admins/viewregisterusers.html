@@ -1,0 +1,60 @@
+{% extends 'admins/adminbase.html' %}
+{% load static %}
+
+{% block contents %}
+<div class="overlay">
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-12 text-center mb-4">
+                <h2 style="color: #fff; font-weight: bold;">View Registered Users</h2>
+                <p class="text-light">Here you can view, manage, and activate newly registered users.</p>
+            </div>
+
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover bg-white text-dark rounded shadow">
+                        <thead class="thead-dark">
+                            <tr style="background-color: #2e8b57; color: white;">
+                                <th scope="col">S.No</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Login ID</th>
+                                <th scope="col">Mobile</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Locality</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Activate</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in data %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ i.name }}</td>
+                                <td>{{ i.loginid }}</td>
+                                <td>{{ i.mobile }}</td>
+                                <td>{{ i.email }}</td>
+                                <td>{{ i.locality }}</td>
+                                <td>
+                                    {% if i.status == 'waiting' %}
+                                        <span class="badge badge-warning">{{ i.status }}</span>
+                                    {% else %}
+                                        <span class="badge badge-success">{{ i.status }}</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if i.status == 'waiting' %}
+                                        <a href="/ActivaUsers/?uid={{ i.id }}" class="btn btn-sm btn-primary">Activate</a>
+                                    {% else %}
+                                        <span class="text-success font-weight-bold">Activated</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

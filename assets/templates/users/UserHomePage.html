@@ -1,0 +1,41 @@
+{% extends 'users/userbase.html' %}
+{% load static %}
+
+{% block contents %}
+<!-- Full-page black background -->
+<div class="fullscreen landing parallax banner" style="background-color: #000000; padding: 80px 0;">
+
+    <div class="overlay" style="background-color: rgba(0, 0, 0, 0.8);">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <!-- Content section centered -->
+                    <h1 class="main-title" style="color: #ffffff;">Predicting Climate Through Public Sentiment</h1>
+                    <p class="subtitle" style="color: #ccc;">We analyze public voices to forecast climate changes and drive sustainable action using modern machine learning tools.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Feature section with black background -->
+<div id="feature" style="background-color: #000000; padding: 60px 0; color: white;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-4 feature-box" style="background-color: #333333; border-radius: 15px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); color: white;">
+                <h4 style="color: #ffffff;">Sentiment Analysis</h4>
+                <p style="color: #bbb;">Gauge public emotions from social platforms like Twitter, Reddit, etc.</p>
+            </div>
+            <div class="col-md-4 feature-box" style="background-color: #333333; border-radius: 15px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); color: white;">
+                <h4 style="color: #ffffff;">Climate Forecast</h4>
+                <p style="color: #bbb;">Use AI to link public opinion trends to potential climate shifts.</p>
+            </div>
+            <div class="col-md-4 feature-box" style="background-color: #333333; border-radius: 15px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); color: white;">
+                <h4 style="color: #ffffff;">Global Insights</h4>
+                <p style="color: #bbb;">Explore sentiment across different regions and demographics.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

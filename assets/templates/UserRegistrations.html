@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contents %}
+<!-- User Registration Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-7 col-xl-6">
+                <!-- Registration Card -->
+                <div class="glass card shadow-lg border-0 rounded-4 p-5">
+                    <div class="card-body">
+                        <!-- Title -->
+                        <div class="text-center mb-5">
+                            <i class="fab fa-twitter fa-3x text-primary mb-4 opacity-75"></i>
+                            <h2 class="fw-bold mb-2 display-5">Twitter User Registration</h2>
+                            <p class="text-muted lead mb-0">Create account for sentiment analysis</p>
+                        </div>
+
+                        <!-- Messages -->
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-danger alert-dismissible fade show rounded-3 mb-4" role="alert">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-exclamation-circle me-3 fs-4"></i>
+                                        <span>{{ message }}</span>
+                                    </div>
+                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+
+                        <!-- Registration Form - Perfectly Aligned -->
+                        <form action="{% url 'UserRegisterActions' %}" method="POST">
+                            {% csrf_token %}
+                            
+                            <div class="row g-4 g-md-4">
+                                <!-- Row 1: Basic Info -->
+                                <div class="col-12">
+                                    <h5 class="fw-bold text-white mb-4 pb-2 border-bottom border-white border-opacity-25">
+                                        <i class="fas fa-user me-2"></i>Personal Information
+                                    </h5>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold text-white mb-3">Full Name</label>
+                                    {{ form.name }}
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold text-white mb-3">Login ID</label>
+                                    {{ form.loginid }}
+                                </div>
+
+                                <!-- Row 2: Contact Info -->
+                                <div class="col-12">
+                                    <h5 class="fw-bold text-white mb-4 pb-2 border-bottom border-white border-opacity-25 mt-5">
+                                        <i class="fas fa-phone me-2"></i>Contact Details
+                                    </h5>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold text-white mb-3">Mobile Number</label>
+                                    {{ form.mobile }}
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold text-white mb-3">Email Address</label>
+                                    {{ form.email }}
+                                </div>
+
+                                <!-- Row 3: Password -->
+                                <div class="col-12">
+                                    <label class="form-label fw-semibold text-white mb-3">
+                                        <i class="fas fa-lock me-2"></i>Password
+                                    </label>
+                                    {{ form.password }}
+                                </div>
+
+                                <!-- Row 4: Address -->
+                                <div class="col-12">
+                                    <h5 class="fw-bold text-white mb-4 pb-2 border-bottom border-white border-opacity-25 mt-5">
+                                        <i class="fas fa-map-marker-alt me-2"></i>Address Information
+                                    </h5>
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label fw-semibold text-white mb-3">Locality</label>
+                                    {{ form.locality }}
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label fw-semibold text-white mb-3">City</label>
+                                    {{ form.city }}
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="form-label fw-semibold text-white mb-3">State</label>
+                                    {{ form.state }}
+                                </div>
+
+                                <!-- Row 5: Full Address -->
+                                <div class="col-12">
+                                    <label class="form-label fw-semibold text-white mb-3">Complete Address</label>
+                                    {{ form.address }}
+                                </div>
+
+                                <!-- Hidden Status Field -->
+                                <div class="col-12 d-none">
+                                    {{ form.status }}
+                                </div>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="d-flex gap-3 justify-content-center mt-6 pt-4 border-top border-white border-opacity-20">
+                                <button type="submit" class="btn btn-primary btn-lg px-5 py-3 fw-bold rounded-pill shadow-lg">
+                                    <i class="fas fa-user-plus me-2"></i>Complete Registration
+                                </button>
+                                <a href="{% url 'UserLogin' %}" class="btn btn-outline-light btn-lg px-5 py-3 fw-bold rounded-pill shadow-lg">
+                                    <i class="fas fa-sign-in-alt me-2"></i>Back to Login
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
